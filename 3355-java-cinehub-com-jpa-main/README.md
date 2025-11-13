@@ -1,17 +1,38 @@
+# 🎬 CineHub
 
-![Programação-Formação Java](https://github.com/iasminaraujoc/3355-java-screenmatch-com-jpa/assets/84939115/3c51e000-962d-4dc9-97fc-1d384e2511a2)
+[![Java](https://img.shields.io/badge/Java-17+-red?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![OMDb API](https://img.shields.io/badge/API-OMDb-orange?logo=imdb&logoColor=white)](https://www.omdbapi.com/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-# Java: persistência de dados e consultas com Spring Data JPA
+---
 
-Projeto desenvolvido no segundo curso da formação Avançando com Java da Alura
+## 🧩 Descrição
 
+O **CineHub** é uma aplicação desenvolvida em **Java** que permite pesquisar informações sobre **séries de TV** por meio da **API pública OMDb**.  
+Os dados retornados em **JSON** são tratados e exibidos ao usuário em um **menu interativo no console**, e as séries pesquisadas são **armazenadas em um banco PostgreSQL**.
 
-## 🔨 Objetivos do projeto
+O projeto foi criado com foco em **integração de APIs**, **persistência de dados** e **boas práticas de desenvolvimento Java**.
 
-- Evoluir no projeto Screenmatch, iniciado no primeiro curso da formação, criando um menu com várias opções;
-- Modelar as abstrações da aplicação através de classes, enums, atributos e métodos;
-- Consumir a API do ChatGPT;
-- Utilizar o Spring Data JPA para persistir dados no banco;
-- Conhecer vários tipos de banco de dados e utilizar o PostgreSQL;
-- Trabalhar com vários tipos de consultas ao banco de dados;
-- Aprofundar na interface JPARepository
+---
+
+## 🚀 Funcionalidades
+
+- 🔍 **Buscar Série** – consulta a API OMDb e exibe informações detalhadas.  
+- 📜 **Listar Séries Pesquisadas** – mostra as séries já registradas no banco.  
+- 🎞️ **Buscar Episódios** – pesquisa episódios de uma série específica.  
+- 💾 **Registro em Banco de Dados** – cada série pesquisada é salva automaticamente no PostgreSQL.  
+- ⚙️ **Tratamento de JSON** – integração com biblioteca para conversão de dados.
+
+---
+
+## 🧠 Tecnologias Utilizadas
+
+- ☕ **Java 17+**
+- 🧩 **JPA / Hibernate**
+- 🐘 **PostgreSQL**
+- 🌐 **API OMDb**
+- 📦 **Maven**
+- 🧰 **Biblioteca JSON (Gson ou Jackson)**
+
+---
