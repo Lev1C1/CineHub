@@ -1,0 +1,7 @@
+package br.com.cinehub.repository;
+
+import br.com.cinehub.model.Serie;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SerieRepository extends JpaRepository<Serie, Long> {
+}
