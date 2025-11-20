@@ -17,7 +17,7 @@ public class Principal {
     private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=6585022c";
-    private List<Serie> seriesBuscadas = new ArrayList<>();
+    private List<Serie> seriesBuscadas ;
     private SerieRepository repositorio;
 
    public Principal(SerieRepository repositorio){
@@ -104,6 +104,8 @@ public class Principal {
     }
 
     private void listarSeriesBuscadas() {
+       seriesBuscadas = repositorio.findAll();
+
         if (seriesBuscadas.isEmpty()) {
             System.out.println("⚠️ Nenhuma série foi buscada ainda!");
             return;
