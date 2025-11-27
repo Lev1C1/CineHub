@@ -2,6 +2,7 @@ package br.com.cinehub.principal;
 
 import br.com.cinehub.model.DadosSerie;
 import br.com.cinehub.model.DadosTemporada;
+import br.com.cinehub.model.Episodio;
 import br.com.cinehub.model.Serie;
 import br.com.cinehub.repository.SerieRepository;
 import br.com.cinehub.service.ConsumoApi;
@@ -9,6 +10,7 @@ import br.com.cinehub.service.ConverteDados;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Principal {
 
@@ -92,15 +94,50 @@ public class Principal {
     }
 
     private void buscarEpisodioPorSerie() {
-        DadosSerie dadosSerie = getDadosSerie();
-        List<DadosTemporada> temporadas = new ArrayList<>();
+        listarSeriesBuscadas();
+        System.out.println("Escolha uma série pelo nome: ");
+        var nomeSerie = leitura.nextLine();
 
-        for (int i = 1; i <= dadosSerie.totalTemporadas(); i++) {
-            var json = consumo.obterDados(ENDERECO + dadosSerie.titulo().replace(" ", "+") + "&season=" + i + API_KEY);
-            DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
-            temporadas.add(dadosTemporada);
+        Optional<Serie> serie = seriesBuscadas.stream()
+                .filter(s -> s.getTitulo().toLowerCase().contains(nomeSerie.toLowerCase()))
+                .findFirst();
+
+        if (serie.isPresent()){
+
+            var serieEncontrada = serie.get();
+            List<DadosTemporada> temporadas = new ArrayList<>();
+
+            for (int i = 1; i <= serieEncontrada.getTotalTemporadas(); i++) {
+                var json = consumo.obterDados(ENDERECO + serieEncontrada.getTitulo().replace(" ", "+") + "&season=" + i + API_KEY);
+                DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
+                temporadas.add(dadosTemporada);
+            }
+            System.out.println("=================================================");
+            System.out.println("📺 EPISÓDIOS DA SÉRIE: " + serieEncontrada.getTitulo());
+            System.out.println("=================================================");
+
+            for (DadosTemporada t : temporadas) {
+                System.out.println("\n-------------------------------------------------");
+                System.out.println("📌 Temporada " + t.numero());
+                System.out.println("-------------------------------------------------");
+
+                t.episodios().forEach(e -> {
+                    System.out.printf(
+                            "   🔹 Episódio %02d - %s%n",
+                            e.numero(),
+                            e.titulo()
+                    );
+                });
+            }
+            List<Episodio> episodios = temporadas.stream()
+                    .flatMap(d -> d.episodios().stream()
+                            .map(e -> new Episodio(d.numero(),e,serieEncontrada)))
+                    .collect(Collectors.toList());
+            serieEncontrada.setEpisodios(episodios);
+            repositorio.save(serieEncontrada);
+        } else {
+            System.out.println("Série não encontrada!");
         }
-        temporadas.forEach(System.out::println);
     }
 
     private void listarSeriesBuscadas() {
