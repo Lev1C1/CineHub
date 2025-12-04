@@ -30,11 +30,16 @@ public class Serie {
 
     private String sinopse;
 
+    private String tituloBusca;
+
+    private String tituloPtBr;
+
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     private List<Episodio> episodios = new ArrayList<>();
 
     public Serie(DadosSerie dadosSerie){
         this.titulo = dadosSerie.titulo();
+        this.tituloPtBr = dadosSerie.tituloPtBr(); // NOVO
         this.totalTemporadas = dadosSerie.totalTemporadas();
         this.avaliacao = OptionalDouble.of(Double.valueOf(dadosSerie.avaliacao())).orElse(0);
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
@@ -43,7 +48,24 @@ public class Serie {
         this.sinopse = ConsultaMyMemory.obterTraducao(dadosSerie.sinopse().trim());
     }
 
+
     public Serie() {
+    }
+
+    public String getTituloPtBr() {
+        return tituloPtBr;
+    }
+
+    public void setTituloPtBr(String tituloPtBr) {
+        this.tituloPtBr = tituloPtBr;
+    }
+
+    public String getTituloBusca() {
+        return tituloBusca;
+    }
+
+    public void setTituloBusca(String tituloBusca) {
+        this.tituloBusca = tituloBusca;
     }
 
     public List<Episodio> getEpisodios() { return episodios; }
