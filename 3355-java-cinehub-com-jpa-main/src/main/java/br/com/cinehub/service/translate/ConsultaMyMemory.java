@@ -3,10 +3,12 @@ package br.com.cinehub.service.translate;
 import br.com.cinehub.service.ConsumoApi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Service;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+@Service
 public class    ConsultaMyMemory {
 
     public static String obterTraducao(String text) {
