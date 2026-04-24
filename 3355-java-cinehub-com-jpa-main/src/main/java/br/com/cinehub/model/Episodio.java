@@ -26,7 +26,7 @@ public class Episodio {
         this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
         this.numeroEpisodio = dadosEpisodio.numero();
-        this.serie = serie; // ← ESSENCIAL
+        this.serie = serie;
 
         try {
             this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
