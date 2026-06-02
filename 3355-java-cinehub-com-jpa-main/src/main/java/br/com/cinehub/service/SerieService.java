@@ -81,6 +81,14 @@ public class SerieService {
                 .orElse(List.of());
     }
 
+    public List<EpisodioDTO> todosEpisodiosPorSerie(String nomeSerie) {
+        return repositorio.findByTituloContainingIgnoreCase(nomeSerie)
+                .map(serie -> serie.getEpisodios()
+                        .stream()
+                        .map(EpisodioDTO::from)
+                        .toList())
+                .orElse(List.of());
+    }
     // ---------- operações que chamam APIs externas ----------
 
     public SerieDTO buscarOuSalvarSerie(String nome) {
