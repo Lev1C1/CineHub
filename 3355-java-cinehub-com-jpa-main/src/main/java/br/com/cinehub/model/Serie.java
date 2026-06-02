@@ -41,7 +41,11 @@ public class Serie {
         this.titulo = dadosSerie.titulo();
         this.tituloPtBr = dadosSerie.tituloPtBr();
         this.totalTemporadas = dadosSerie.totalTemporadas();
-        this.avaliacao = OptionalDouble.of(Double.valueOf(dadosSerie.avaliacao())).orElse(0);
+        try {
+            this.avaliacao = Double.valueOf(dadosSerie.avaliacao());
+        } catch (NumberFormatException e) {
+            this.avaliacao = 0.0;
+        }
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
