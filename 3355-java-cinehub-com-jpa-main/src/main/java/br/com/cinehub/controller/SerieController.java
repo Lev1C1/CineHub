@@ -85,4 +85,17 @@ public class SerieController {
     public List<EpisodioDTO> topEpisodios(@RequestParam String nome) {
         return serieService.topEpisodiosPorSerie(nome);
     }
+
+    // GET /series/episodios/todos?nome=Breaking Bad
+    @GetMapping("/episodios/todos")
+    public List<EpisodioDTO> todosEpisodios(@RequestParam String nome) {
+        return serieService.todosEpisodiosPorSerie(nome);
+    }
+
+    @PostMapping("/buscar-completo")
+    public ResponseEntity<SerieDTO> buscarCompleto(@RequestParam String nome) {
+        SerieDTO serie = serieService.buscarOuSalvarSerie(nome);
+        serieService.buscarECarregarEpisodios(nome);
+        return ResponseEntity.ok(serie);
+    }
 }
